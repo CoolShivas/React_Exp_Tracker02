@@ -1,3 +1,4 @@
+import AuthForm from "./components/auth/AuthForm";
 import Header from "./components/header/Header";
 import ProductPage from "./pages/ProductPage";
 import AboutPage from "./pages/AboutPage";
@@ -13,6 +14,7 @@ const App = () => {
       <Route path="/homepage"> <HomePage></HomePage> </Route>
       <Route path="/aboutpage"> <AboutPage></AboutPage> </Route>
       <Route path="/productpage"> <ProductPage></ProductPage> </Route>
+      <Route path="/authformpage"> <AuthForm></AuthForm> </Route>
 
     </>
   )
