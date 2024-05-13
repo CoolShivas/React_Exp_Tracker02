@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useRef } from "react";
 import styles from "./AuthForm.module.css";
 
@@ -10,16 +11,29 @@ const AuthForm = () => {
     const inputPassword = useRef('');
     const inputConfirmPassword = useRef('');
 
-    const handlerOnSubmitForm = (event) => {
+    const handlerOnSubmitForm = async (event) => {
         event.preventDefault();
 
-        const enteredEmail = inputEmail.current.value;
-        const enteredPassword = inputPassword.current.value;
-        const enteredConfirmPassword = inputConfirmPassword.current.value;
+        try {
+            const enteredEmail = inputEmail.current.value;
+            const enteredPassword = inputPassword.current.value;
+            const enteredConfirmPassword = inputConfirmPassword.current.value;
 
-        console.log(enteredEmail);
-        console.log(enteredPassword);
-        console.log(enteredConfirmPassword);
+            const res = await axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=
+         AIzaSyDH5JlMv2hpQuoT9E47PiPYHTdFE_P2Gs0`, {
+                id: Math.random(),
+                email: enteredEmail,
+                password: enteredPassword,
+                confirmPass: enteredConfirmPassword,
+            });
+            console.log(res);
+
+            console.log(enteredEmail);
+            console.log(enteredPassword);
+            console.log(enteredConfirmPassword);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
