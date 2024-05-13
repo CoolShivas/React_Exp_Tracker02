@@ -1,6 +1,6 @@
 .auth_form__page{
     /* background-color: orange; */
-    background-color: #9DDE8B;
+    
     position: relative;
     
     left: 25%;
@@ -9,7 +9,7 @@
 
     && .form_container{
         /* background-color: orangered; */
-        
+        background-color: #9DDE8B;    
         padding: 1rem;
         margin: 1rem;
         width: 20%;
