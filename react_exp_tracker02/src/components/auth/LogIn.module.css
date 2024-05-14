@@ -1,0 +1,84 @@
+.login_page__div{
+    /* background-color: aquamarine; */
+    position: relative;
+    
+    left: 25%;
+    width: 20%;
+    min-width: 25rem;
+
+    && .login_container{
+        background-color: #57A6A1;
+        padding: 1rem;
+        margin: 1rem;
+        width: 20%;
+        min-width: 25rem;
+        height: auto;
+
+        && .login_div{
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            padding: 10px;
+        }
+    }
+    && input{
+        display: block;
+        margin: 5px 0;
+        width: 100%;
+        
+    }
+
+    && .login_actions{
+            text-align: center;
+            margin: 10px;
+            
+            border: none;
+
+            && button{
+                border: none;
+                background-color: #BFF6C3;
+                padding: 2px 100px;
+
+                border-radius: 12px;
+                -webkit-border-radius: 12px;
+                -moz-border-radius: 12px;
+                -ms-border-radius: 12px;
+                -o-border-radius: 12px;
+
+            }
+
+            && button:hover{
+                background-color: #E6FF94;
+                font-size: 20px;
+            }
+    }
+}
+
+.dont_have__account{
+    text-align: center;
+    
+    && button{
+        background-color: #9DDE8B;
+        border: none;
+        padding: 5px;
+        margin-left: 25px;
+    }
+
+    && button:hover{
+        background-color: #FF9F66;
+        font-size: 20px;
+    }
+}
+
+
+.forgot_password{
+    text-decoration: none;
+    color: wheat;
+    margin-left: 115px;
+    padding: 10px;
+}
+
+.forgot_password:hover{
+    color: blue;
+    font-weight: bold;
+}

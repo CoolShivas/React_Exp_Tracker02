@@ -1,11 +1,14 @@
 import axios from "axios";
 import { useRef } from "react";
 import styles from "./AuthForm.module.css";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
 
 
 
 const AuthForm = () => {
+
+    const myHistory = useHistory();
 
     const inputEmail = useRef('');
     const inputPassword = useRef('');
@@ -34,6 +37,7 @@ const AuthForm = () => {
         } catch (error) {
             console.log(error);
         }
+        myHistory.replace("/login");
     };
 
     return (

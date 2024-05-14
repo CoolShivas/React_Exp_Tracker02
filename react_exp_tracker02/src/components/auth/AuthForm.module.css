@@ -36,11 +36,42 @@
     && .actions{
         text-align: center;
         margin: 10px;
+
+        && button{
+            border: none;
+            padding: 2px 130px;
+            background-color: orange;
+
+            border-radius: 12px;
+            -webkit-border-radius: 12px;
+            -moz-border-radius: 12px;
+            -ms-border-radius: 12px;
+            -o-border-radius: 12px;
+        }
+
+        && button:hover{
+            background-color: #6DC5D1;
+            font-size: 20px;
+            color: white;
+        }
     }
 
     && .create_account{
         text-align: center;
         margin: 10px;
+
+        && button{
+            background-color: #EEEEEE;
+            border: none;
+            padding: 3px 10px;
+        }
+
+        && button:hover{
+            background-color: #AD88C6;
+            padding: 10px;
+            color: white;
+        }
+
     }
 
     
