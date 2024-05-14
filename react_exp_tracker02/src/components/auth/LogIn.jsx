@@ -1,8 +1,10 @@
-import { NavLink } from "react-router-dom/cjs/react-router-dom";
+import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom";
 import styles from "./LogIn.module.css";
 import { useRef } from "react";
 
 const LogIn = () => {
+
+    const myWelPage = useHistory();
 
     const inputLoginEmail = useRef('');
 
@@ -27,6 +29,7 @@ const LogIn = () => {
             },
         }).then((res) => {
             console.log(res);
+            myWelPage.replace("/welcomepage");
             if (res.ok) {
                 return res.json();
             }

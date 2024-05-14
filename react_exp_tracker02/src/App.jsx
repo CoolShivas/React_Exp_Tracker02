@@ -1,3 +1,4 @@
+import WelcomePage from "./pages/WelcomePage";
 import LogIn from "./components/auth/LogIn";
 import AuthForm from "./components/auth/AuthForm";
 import Header from "./components/header/Header";
@@ -17,6 +18,7 @@ const App = () => {
       <Route path="/productpage"> <ProductPage></ProductPage> </Route>
       <Route path="/authformpage"> <AuthForm></AuthForm> </Route>
       <Route path="/login"> <LogIn></LogIn> </Route>
+      <Route path="/welcomepage"> <WelcomePage></WelcomePage> </Route>
     </>
   )
 }
