@@ -11,8 +11,8 @@ import styles from "./App.module.css";
 const App = () => {
   return (
     <>
-      <Header></Header>
 
+      <Route exact path="/"> <Header></Header> </Route>
       <Route path="/homepage"> <HomePage></HomePage> </Route>
       <Route path="/aboutpage"> <AboutPage></AboutPage> </Route>
       <Route path="/productpage"> <ProductPage></ProductPage> </Route>

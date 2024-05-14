@@ -1,0 +1,16 @@
+.incompleteprofile_page{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    
+    && h4{
+        font-size: 15px;
+    }
+
+    && .complete_profile{
+        font-size: 15px;
+        text-decoration: none;
+    }
+    
+}
