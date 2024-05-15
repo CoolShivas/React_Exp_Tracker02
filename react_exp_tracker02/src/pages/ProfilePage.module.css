@@ -1,84 +1,72 @@
-.profile_page{
-    /* background-color: orange; */
-    width: 90%;
-    position: relative;
-    left: 20%;
-    margin: 25px;
+.profile_page {
+  /* background-color: orange; */
+  width: 90%;
+  position: relative;
+  left: 20%;
+  margin: 25px;
 
-    && .form_profile__page{
-        background-color: #D1BB9E;
-        width: 70%;
-        
-        && .contact_details{
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            padding: 10px;
-            margin: 25px;
-        }
+  && .form_profile__page {
+    background-color: #d1bb9e;
+    width: 70%;
 
-
-
-        /* && label{
-            font-size: 20px;
-            font-weight: 600;
-            
-            
-        }
-
-        
-        && input{
-            display: block;
-            width: 70%;
-            padding: 5px;
-            margin: 2px;
-            
-        }         */
-        
+    && .contact_details {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 10px;
+      margin: 25px;
     }
 
-}
+    && label {
+      font-size: 20px;
+      font-weight: 600;
+      margin-left: 10px;
+    }
 
+    && input {
+      display: block;
+      width: 70%;
+      padding: 5px;
+      margin: 2px;
+    }
 
-.cancel_btn{
-    background: transparent;
-    padding: 2px 18px;
-    border: 2px solid red;
-    color: red;
-    font-size: 20px;
-    font-weight: 500;
+    .cancel_btn {
+      background: transparent;
+      padding: 2px 18px;
+      border: 2px solid red;
+      color: red;
+      font-size: 20px;
+      font-weight: 500;
+    }
 
-}
+    .cancel_btn:hover {
+      background-color: tomato;
+      color: wheat;
+      font-size: 20px;
+      font-weight: 500;
+    }
 
-.cancel_btn:hover{
-    background-color: tomato;
-    color: wheat;
-    font-size: 20px;
-    font-weight: 500;
-}
-
-.update_actions{
-    /* background-color: orange; */
-    && button{
+    .update_actions {
+      /* background-color: orange; */
+      && button {
         background-color: orange;
         border: none;
         margin: 20px;
-        padding: 2px 12rem;
-        
-
+        padding: 2px 10rem;
 
         border-radius: 15px;
         -webkit-border-radius: 15px;
         -moz-border-radius: 15px;
         -ms-border-radius: 15px;
         -o-border-radius: 15px;
+      }
 
-    }
-
-    && button:hover{
+      && button:hover {
         background-color: greenyellow;
         font-size: 20px;
         font-weight: 500;
+      }
     }
+  }
 }

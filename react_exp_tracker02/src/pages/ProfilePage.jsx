@@ -1,3 +1,5 @@
+import { IoIosGlobe } from "react-icons/io";
+import { FaGithub } from "react-icons/fa";
 import axios from "axios";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import styles from "./ProfilePage.module.css";
@@ -58,11 +60,13 @@ const ProfilePage = () => {
                     </div>
 
                     <div className={styles.full_name}>
+                        <FaGithub style={{ width: "30px", height: "30px" }} />
                         <label htmlFor="fullname"> Full Name </label>
                         <input type="text" id="fullname" name="fullname" required ref={inputFullName} />
                     </div>
 
                     <div className={styles.profile_photo}>
+                        <IoIosGlobe style={{ width: "30px", height: "30px" }} />
                         <label htmlFor="profilephoto"> Profile Photo URL </label>
                         <input type="link" id="profilephoto" name="profilephoto" required ref={inputImageUrl} />
                     </div>
