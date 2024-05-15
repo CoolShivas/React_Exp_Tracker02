@@ -45,6 +45,9 @@ const LogIn = () => {
             }
         }).then((response) => {
             console.log(response);
+            console.log(response.idToken);
+            localStorage.setItem("SaveToken", response.idToken);
+            // Saving the token id in localStorage of a particular user for future profile updates
 
         }).catch((err) => {
             console.log(err.message);
