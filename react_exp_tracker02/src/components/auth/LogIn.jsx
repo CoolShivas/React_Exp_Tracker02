@@ -55,6 +55,10 @@ const LogIn = () => {
         enteredLoginPassword.current.value = '';
     };
 
+    const handlerOnHaveNotAccount = () => {
+        myWelPage.replace("/authformpage");
+    };
+
     return (
         <div className={styles.login_page__div}>
             <div className={styles.login_container}>
@@ -75,7 +79,7 @@ const LogIn = () => {
                 </form>
             </div>
             <div className={styles.dont_have__account}>
-                <button>
+                <button onClick={handlerOnHaveNotAccount}>
                     Don't have an account? Sign Up
                 </button>
             </div>

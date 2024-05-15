@@ -40,6 +40,10 @@ const AuthForm = () => {
         myHistory.replace("/login");
     };
 
+    const handlerOnHaveAccount = () => {
+        myHistory.replace("/login");
+    };
+
     return (
         <div className={styles.auth_form__page}>
             <div className={styles.form_container}>
@@ -64,7 +68,7 @@ const AuthForm = () => {
                     </div>
 
                     <div className={styles.create_account}>
-                        <button>
+                        <button onClick={handlerOnHaveAccount}>
                             Have an account? Login
                         </button>
                     </div>
