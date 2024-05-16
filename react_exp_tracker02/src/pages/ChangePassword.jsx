@@ -1,12 +1,33 @@
 import axios from "axios";
 import styles from "./ChangePassword.module.css";
-import { Link } from "react-router-dom/cjs/react-router-dom";
+import { NavLink } from "react-router-dom/cjs/react-router-dom";
+import { useRef } from "react";
 
 
 const ChangePassword = () => {
 
-    const handlerOnChangePasswordSubmit = (event) => {
-        event.preventDefault();
+    const registeredEmail = useRef();
+
+    const handlerOnChangePasswordSubmit = async (event) => {
+
+        try {
+            event.preventDefault();
+
+            const enteredRegEmail = registeredEmail.current.value;
+            console.log(enteredRegEmail);
+
+            const res = await axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDH5JlMv2hpQuoT9E47PiPYHTdFE_P2Gs0`, {
+                requestType: "PASSWORD_RESET",
+                email: enteredRegEmail,
+            })
+            console.log(res);
+            return (res);
+
+        } catch (error) {
+            console.log(error);
+            alert(error);
+        }
+
 
 
 
@@ -23,12 +44,12 @@ const ChangePassword = () => {
                 <div className={styles.change_password__profile}>
 
                     <label htmlFor="userid"> Enter the email by which you have registered </label>
-                    <input type="email" id="userid" name="userid" required className="form-control" />
+                    <input type="email" id="userid" name="userid" required className="form-control" ref={registeredEmail} />
 
                     <div className={styles.btn_link__actions}>
                         <button className="send_link__btn"> Send Link </button>
 
-                        <Link className={styles.link_forget__login}> Already a user? Login </Link>
+                        <NavLink to="/login" className={styles.link_forget__login}> Already a user? Login </NavLink>
                     </div>
                 </div>
 
