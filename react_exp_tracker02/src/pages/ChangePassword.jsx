@@ -1,10 +1,12 @@
 import axios from "axios";
 import styles from "./ChangePassword.module.css";
 import { NavLink } from "react-router-dom/cjs/react-router-dom";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 
 const ChangePassword = () => {
+
+    const [isLoading, setIsLoading] = useState(false);
 
     const registeredEmail = useRef();
 
@@ -12,6 +14,7 @@ const ChangePassword = () => {
 
         try {
             event.preventDefault();
+            setIsLoading(true);
 
             const enteredRegEmail = registeredEmail.current.value;
             console.log(enteredRegEmail);
@@ -21,16 +24,13 @@ const ChangePassword = () => {
                 email: enteredRegEmail,
             })
             console.log(res);
+            setIsLoading(false);
             return (res);
 
         } catch (error) {
             console.log(error);
             alert(error);
         }
-
-
-
-
     };
 
     return (
@@ -47,7 +47,9 @@ const ChangePassword = () => {
                     <input type="email" id="userid" name="userid" required className="form-control" ref={registeredEmail} />
 
                     <div className={styles.btn_link__actions}>
-                        <button className="send_link__btn"> Send Link </button>
+                        {!isLoading && <button className="send_link__btn"> Send Link </button>}
+
+                        {isLoading && <button className="send_link__btn"> Sending Request... </button>}
 
                         <NavLink to="/login" className={styles.link_forget__login}> Already a user? Login </NavLink>
                     </div>
