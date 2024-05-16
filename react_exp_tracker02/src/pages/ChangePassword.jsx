@@ -1,11 +1,20 @@
+import axios from "axios";
 import styles from "./ChangePassword.module.css";
 import { Link } from "react-router-dom/cjs/react-router-dom";
 
 
 const ChangePassword = () => {
+
+    const handlerOnChangePasswordSubmit = (event) => {
+        event.preventDefault();
+
+
+
+    };
+
     return (
         <div className={styles.change_password__div}>
-            <form action="" className={styles.container_change__pass}>
+            <form action="#" className={styles.container_change__pass} onSubmit={handlerOnChangePasswordSubmit}>
 
                 <div className={styles.image_pass__forgot}>
                     <img src="../../public/Lock.jpg" alt="image not found" style={{ width: "350px", height: "300px" }} />

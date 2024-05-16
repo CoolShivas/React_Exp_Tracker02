@@ -78,7 +78,7 @@ const LogIn = () => {
                             Login
                         </button>
                     </div>
-                    <NavLink to="" className={styles.forgot_password}> Forgot password </NavLink>
+                    <NavLink to="/changepassword" className={styles.forgot_password}> Forgot password </NavLink>
                 </form>
             </div>
             <div className={styles.dont_have__account}>
