@@ -1,9 +1,12 @@
 import axios from "axios";
 import styles from "./WelcomePage.module.css";
 import InCompleteProfilePage from "./InCompleteProfilePage";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
 
 const WelcomePage = () => {
+
+    const returnToLogin = useHistory();
 
     const handlerOnVerifyEmailId = async () => {
         try {
@@ -19,6 +22,12 @@ const WelcomePage = () => {
         }
     };
 
+    const handlerOnLogOutBtn = () => {
+        localStorage.removeItem("SaveToken");
+        returnToLogin.replace("/login");
+    };
+
+
     return (
         <div className={styles.welcomepage_div}>
             <h3> Welcome to Expense Tracker!!! </h3>
@@ -27,6 +36,9 @@ const WelcomePage = () => {
                 ></InCompleteProfilePage>
             </span>
             <button className={styles.verify_ID__btn} onClick={handlerOnVerifyEmailId}> Verify ID </button>
+            <button className={styles.logout_btn}
+                onClick={handlerOnLogOutBtn}
+            > Logout </button>
             <hr />
         </div>
     )
