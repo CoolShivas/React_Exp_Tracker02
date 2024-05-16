@@ -15,8 +15,10 @@
   }
 
   && .incomplete_profilepage {
-    /* background-color: red; */
-    /* margin-left: 125px; */
+    display: flex;
+    flex-direction: row;
+    align-items: self-end;
+    gap: 1rem;
   }
 
   && .verify_ID__btn {

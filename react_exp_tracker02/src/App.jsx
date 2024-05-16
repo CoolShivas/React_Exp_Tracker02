@@ -1,3 +1,4 @@
+import ChangePassword from "./pages/ChangePassword";
 import ProfilePage from "./pages/ProfilePage";
 import WelcomePage from "./pages/WelcomePage";
 import LogIn from "./components/auth/LogIn";
@@ -21,6 +22,7 @@ const App = () => {
       <Route path="/login"> <LogIn></LogIn> </Route>
       <Route path="/welcomepage"> <WelcomePage></WelcomePage> </Route>
       <Route path="/profilepage"> <ProfilePage></ProfilePage> </Route>
+      <Route path="/changepassword"> <ChangePassword></ChangePassword> </Route>
     </>
   )
 }

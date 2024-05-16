@@ -34,11 +34,12 @@ const WelcomePage = () => {
             <span className={styles.incomplete_profilepage}>
                 <InCompleteProfilePage
                 ></InCompleteProfilePage>
+                <button className={styles.verify_ID__btn} onClick={handlerOnVerifyEmailId}> Verify ID </button>
+                <button className={styles.logout_btn}
+                    onClick={handlerOnLogOutBtn}
+                > Logout </button>
             </span>
-            <button className={styles.verify_ID__btn} onClick={handlerOnVerifyEmailId}> Verify ID </button>
-            <button className={styles.logout_btn}
-                onClick={handlerOnLogOutBtn}
-            > Logout </button>
+
             <hr />
         </div>
     )
