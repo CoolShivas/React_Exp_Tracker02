@@ -1,0 +1,56 @@
+.add_exp__div {
+  /* background-color: yellowgreen; */
+  margin: 90px;
+  width: 50%;
+  height: auto;
+
+  && .daily_expenses {
+    background-color: #7469b6;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    margin: 70px;
+
+    && input {
+      display: block;
+      width: 100%;
+      margin-left: 10px;
+    }
+
+    && label {
+      font-size: 20px;
+      margin: 10px;
+    }
+  }
+}
+
+.listing_items {
+  background-color: #ad88c6;
+  margin: 90px;
+  width: 50%;
+  font-size: 25px;
+
+  && .individual_items {
+    display: flex;
+    flex-direction: row;
+    justify-content: centerc;
+    align-items: center;
+    color: white;
+  }
+}
+
+.add_exp__btn {
+  background-color: #7aba78;
+  display: block;
+  border: none;
+  width: 100%;
+  margin: 10px;
+  color: white;
+  font-size: 20px;
+}
+
+.add_exp__btn:hover {
+  background-color: orange;
+  font-size: 25px;
+  color: black;
+}

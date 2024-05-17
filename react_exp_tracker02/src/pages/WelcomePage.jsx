@@ -1,4 +1,4 @@
-
+import AddExpensePage from "../pages/AddExpensePage"
 import axios from "axios";
 import styles from "./WelcomePage.module.css";
 import InCompleteProfilePage from "./InCompleteProfilePage";
@@ -50,6 +50,7 @@ const WelcomePage = () => {
                 <hr />
             </div>
 
+            <AddExpensePage></AddExpensePage>
 
         </>
     )
