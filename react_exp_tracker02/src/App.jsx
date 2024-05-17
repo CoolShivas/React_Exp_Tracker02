@@ -1,3 +1,4 @@
+import ErrorPage from "./pages/ErrorPage";
 import ChangePassword from "./pages/ChangePassword";
 import ProfilePage from "./pages/ProfilePage";
 import WelcomePage from "./pages/WelcomePage";
@@ -28,6 +29,7 @@ const App = () => {
         {isLoggedIn && <Route path="/welcomepage"> <WelcomePage></WelcomePage> </Route>}
         <Route path="/profilepage"> <ProfilePage></ProfilePage> </Route>
         <Route path="/changepassword"> <ChangePassword></ChangePassword> </Route>
+        <Route path="*"> <ErrorPage></ErrorPage> </Route>
       </Switch>
     </>
   )
