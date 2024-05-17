@@ -22,7 +22,8 @@ const ProfilePage = () => {
     useEffect(() => {
 
         const getDataAfterRefresh = async () => {
-            const res = await axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDH5JlMv2hpQuoT9E47PiPYHTdFE_P2Gs0`, {
+            const res = await axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=
+            AIzaSyDYXxCoZdE5z5sJ5vj2Y3hwTXpVHufKsxc`, {
                 idToken: localStorage.getItem("SaveToken"),
             })
             console.log(res.data);

@@ -19,8 +19,7 @@ const LogIn = () => {
         const enteredLoginEmail = inputLoginEmail.current.value;
         const enteredLoginPassword = inputLoginPassword.current.value;
 
-        fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=
-        AIzaSyDH5JlMv2hpQuoT9E47PiPYHTdFE_P2Gs0`, {
+        fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDYXxCoZdE5z5sJ5vj2Y3hwTXpVHufKsxc`, {
             method: "POST",
             body: JSON.stringify({
                 email: enteredLoginEmail,

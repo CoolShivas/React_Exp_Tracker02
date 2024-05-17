@@ -1,5 +1,6 @@
+import axios from "axios";
 import styles from "./AddExpensePage.module.css";
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const AddExpensePage = () => {
 
@@ -21,16 +22,40 @@ const AddExpensePage = () => {
         setInputChooseCategory(event.target.value);
     };
 
-    const handlerOnAddBtnSubmitForm = (event) => {
+
+    const handlerOnAddBtnSubmitForm = async (event) => {
         event.preventDefault();
         console.log(inputSpentMoney);
         console.log(inputDescription);
         console.log(inputChooseCategory);
-        setItems([...items, { inputSpentMoney, inputDescription, inputChooseCategory }]);
+        // setItems([...items, { inputSpentMoney, inputDescription, inputChooseCategory }]);
+        try {
+            const res = await axios.post(`https://crudcrud.com/api/0947b348109247b1839c0c00e2abef7e/moneySpent`, {
+                inputSpentMoney,
+                inputDescription,
+                inputChooseCategory,
+            })
+            setItems([...items, res.data])
+        } catch (error) {
+            console.log(error);
+        }
         setInputSpentMoney('');
         setInputDescription('');
         setInputChooseCategory('');
     };
+
+    useEffect(() => {
+        const fetchExpenses = async () => {
+            try {
+                const response = await axios.get(`https://crudcrud.com/api/0947b348109247b1839c0c00e2abef7e/moneySpent`);
+                setItems(response.data);
+            } catch (error) {
+                console.error('Error fetching expenses:', error);
+            }
+        };
+
+        fetchExpenses(); // Call the fetch function
+    }, []); // Run only on component mount
 
 
     return (
@@ -63,8 +88,8 @@ const AddExpensePage = () => {
             </div>
 
             <ol className={styles.listing_items}>
-                {items.map((currElem, index) => {
-                    return <li key={index} className={styles.individual_items}>
+                {items.length > 0 && items.map((currElem) => {
+                    return <li key={currElem.id} className={styles.individual_items}>
                         Rs. {currElem.inputSpentMoney} /- {currElem.inputDescription} {currElem.inputChooseCategory}
                     </li>
                 })}

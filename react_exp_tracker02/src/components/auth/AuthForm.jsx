@@ -23,7 +23,7 @@ const AuthForm = () => {
             const enteredConfirmPassword = inputConfirmPassword.current.value;
 
             const res = await axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=
-         AIzaSyDH5JlMv2hpQuoT9E47PiPYHTdFE_P2Gs0`, {
+         AIzaSyDYXxCoZdE5z5sJ5vj2Y3hwTXpVHufKsxc`, {
                 id: Math.random(),
                 email: enteredEmail,
                 password: enteredPassword,

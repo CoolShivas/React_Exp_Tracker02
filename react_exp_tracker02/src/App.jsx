@@ -26,10 +26,11 @@ const App = () => {
         <Route path="/productpage"> <ProductPage></ProductPage> </Route>
         <Route path="/authformpage"> <AuthForm></AuthForm> </Route>
         <Route path="/login"> <LogIn></LogIn> </Route>
-        {isLoggedIn && <Route path="/welcomepage"> <WelcomePage></WelcomePage> </Route>}
+        {/* {isLoggedIn && <Route exact path="/welcomepage"> <WelcomePage></WelcomePage> </Route>} */}
+        <Route exact path="/welcomepage"> <WelcomePage></WelcomePage> </Route>
         <Route path="/profilepage"> <ProfilePage></ProfilePage> </Route>
         <Route path="/changepassword"> <ChangePassword></ChangePassword> </Route>
-        <Route path="*"> <ErrorPage></ErrorPage> </Route>
+        {/* <Route path="*"> <ErrorPage></ErrorPage> </Route> */}
       </Switch>
     </>
   )

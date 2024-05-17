@@ -19,7 +19,8 @@ const ChangePassword = () => {
             const enteredRegEmail = registeredEmail.current.value;
             console.log(enteredRegEmail);
 
-            const res = await axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDH5JlMv2hpQuoT9E47PiPYHTdFE_P2Gs0`, {
+            const res = await axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=
+            AIzaSyDYXxCoZdE5z5sJ5vj2Y3hwTXpVHufKsxc`, {
                 requestType: "PASSWORD_RESET",
                 email: enteredRegEmail,
             })
