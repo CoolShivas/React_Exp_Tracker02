@@ -1,8 +1,11 @@
 import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom";
 import styles from "./LogIn.module.css";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
+import ExpContext from "../../store/ExpContext";
 
 const LogIn = () => {
+
+    const { logIn } = useContext(ExpContext);
 
     const myWelPage = useHistory();
 
@@ -46,8 +49,9 @@ const LogIn = () => {
         }).then((response) => {
             console.log(response);
             console.log(response.idToken);
-            localStorage.setItem("SaveToken", response.idToken);
+            // localStorage.setItem("SaveToken", response.idToken);
             // Saving the token id in localStorage of a particular user for future profile updates
+            logIn(response.idToken);
 
         }).catch((err) => {
             console.log(err.message);
