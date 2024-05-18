@@ -10,6 +10,8 @@ const AddExpensePage = () => {
     const [inputDescription, setInputDescription] = useState();
     const [inputChooseCategory, setInputChooseCategory] = useState();
 
+
+
     const handlerOnSpentMoney = (event) => {
         setInputSpentMoney(event.target.value);
     };
@@ -25,17 +27,20 @@ const AddExpensePage = () => {
 
     const handlerOnAddBtnSubmitForm = async (event) => {
         event.preventDefault();
-        console.log(inputSpentMoney);
-        console.log(inputDescription);
-        console.log(inputChooseCategory);
+        // console.log(inputSpentMoney);
+        // console.log(inputDescription);
+        // console.log(inputChooseCategory);
         // setItems([...items, { inputSpentMoney, inputDescription, inputChooseCategory }]);
+        const expTracker = {
+            spentMoney: inputSpentMoney,
+            details: inputDescription,
+            selectCat: inputChooseCategory,
+        };
+
         try {
-            const res = await axios.post(`https://crudcrud.com/api/0947b348109247b1839c0c00e2abef7e/moneySpent`, {
-                inputSpentMoney,
-                inputDescription,
-                inputChooseCategory,
-            })
-            setItems([...items, res.data])
+            const res = await axios.post(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent.json`, expTracker)
+            console.log(expTracker);
+            setItems([...items, expTracker])
         } catch (error) {
             console.log(error);
         }
@@ -44,11 +49,20 @@ const AddExpensePage = () => {
         setInputChooseCategory('');
     };
 
+
+
+
+
     useEffect(() => {
+
         const fetchExpenses = async () => {
             try {
-                const response = await axios.get(`https://crudcrud.com/api/0947b348109247b1839c0c00e2abef7e/moneySpent`);
-                setItems(response.data);
+                const response = await axios.get(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent.json`);
+                const dataArray = Object.entries(response.data).map(([key, value]) => {
+                    return { id: key, ...value };
+                });
+                // console.log(response.data);
+                setItems(dataArray);
             } catch (error) {
                 console.error('Error fetching expenses:', error);
             }
@@ -56,6 +70,10 @@ const AddExpensePage = () => {
 
         fetchExpenses(); // Call the fetch function
     }, []); // Run only on component mount
+
+
+
+
 
 
     return (
@@ -86,11 +104,15 @@ const AddExpensePage = () => {
                     </form>
                 </div>
             </div>
-
+            {console.log(items)}
             <ol className={styles.listing_items}>
+
                 {items.length > 0 && items.map((currElem) => {
-                    return <li key={currElem.id} className={styles.individual_items}>
-                        Rs. {currElem.inputSpentMoney} /- {currElem.inputDescription} {currElem.inputChooseCategory}
+                    return <li key={currElem.id} className={styles.individual_items}
+                    >
+                        Rs. {currElem.spentMoney} /- {currElem.details} {currElem.selectCat}
+                        {/* Rs. {currElem.inputSpentMoney} /- {currElem.inputDescription} {currElem.inputChooseCategory} */}
+
                     </li>
                 })}
             </ol>

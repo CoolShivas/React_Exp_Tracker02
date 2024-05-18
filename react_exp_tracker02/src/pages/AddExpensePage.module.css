@@ -54,3 +54,20 @@
   font-size: 25px;
   color: black;
 }
+
+.edit_del__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.edit_btn {
+  background-color: greenyellow;
+  border: none;
+  margin-left: 40px;
+}
+
+.del_btn {
+  background-color: tomato;
+  border: none;
+  margin: 1px 8px;
+}
