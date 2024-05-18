@@ -73,6 +73,25 @@ const AddExpensePage = () => {
 
 
 
+    const handlerOnDeleteBtn = async (id) => {
+        console.log('deleting');
+        try {
+            await axios.delete(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent/${id}.json`)
+            setItems(items.filter((item) => item.id !== id));
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+
+    const handlerOnEditBtn = (id) => {
+        console.log('editing');
+    };
+
+
+
+
+
 
 
 
@@ -112,6 +131,17 @@ const AddExpensePage = () => {
                     >
                         Rs. {currElem.spentMoney} /- {currElem.details} {currElem.selectCat}
                         {/* Rs. {currElem.inputSpentMoney} /- {currElem.inputDescription} {currElem.inputChooseCategory} */}
+
+
+                        <div className={styles.edit_del__actions}>
+                            <button className={styles.edit_btn}
+                                onClick={() => handlerOnEditBtn(currElem.id)}
+                            > Edit </button>
+                            <button className={styles.del_btn}
+                                onClick={() => handlerOnDeleteBtn(currElem.id)}
+                            > Delete </button>
+                        </div>
+
 
                     </li>
                 })}
