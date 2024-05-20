@@ -9,6 +9,8 @@ const AddExpensePage = () => {
     const [inputSpentMoney, setInputSpentMoney] = useState();
     const [inputDescription, setInputDescription] = useState();
     const [inputChooseCategory, setInputChooseCategory] = useState();
+    // const [toggleBtnEdit, setToggleBtnEdit] = useState(true);
+    const [isEditing, setIsEditing] = useState(null);
 
 
 
@@ -27,29 +29,95 @@ const AddExpensePage = () => {
 
     const handlerOnAddBtnSubmitForm = async (event) => {
         event.preventDefault();
-        // console.log(inputSpentMoney);
-        // console.log(inputDescription);
-        // console.log(inputChooseCategory);
-        // setItems([...items, { inputSpentMoney, inputDescription, inputChooseCategory }]);
         const expTracker = {
             spentMoney: inputSpentMoney,
             details: inputDescription,
             selectCat: inputChooseCategory,
         };
 
+
         try {
             const res = await axios.post(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent.json`, expTracker)
             console.log(expTracker);
-            setItems([...items, expTracker])
+            setItems([...items, expTracker]);
         } catch (error) {
             console.log(error);
         }
+
         setInputSpentMoney('');
         setInputDescription('');
         setInputChooseCategory('');
+
     };
 
 
+
+
+    const handlerOnDeleteBtn = async (id) => {
+        console.log('deleting');
+        try {
+            await axios.delete(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent/${id}.json`)
+            setItems(items.filter((item) => item.id !== id));
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+
+    // const handlerOnEditBtn = async (id) => {
+
+    //     try {
+    //         const res = await axios.get(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent/${id}.json`);
+
+    //         console.log(res);
+
+    //         setInputSpentMoney(inputSpentMoney);
+    //         setInputDescription(inputDescription);
+    //         setInputChooseCategory(inputChooseCategory);
+    //         handlerOnEditUpdate();
+
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
+
+    // const handlerOnEditUpdate = async (id) => {
+    //     try {
+    //         const expenseData = {
+    //             inputSpentMoney: inputSpentMoney,
+    //             inputDescription: inputDescription,
+    //             inputChooseCategory: inputChooseCategory,
+    //         };
+
+    //         const res = await axios.patch(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent/${id}.json`, expenseData);
+
+    //         console.log(res);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+
+    // };
+
+
+    const handlerOnEditBtn = (id) => {
+        let inputData = items.find((elem) => {
+            return elem.id === id;
+        })
+        console.log(inputData);
+        setInputSpentMoney(inputData.spentMoney);
+        setInputDescription(inputData.details);
+        setInputChooseCategory(inputData.selectCat);
+        axios.put(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent/${id}.json`, {
+            inputData
+        });
+        setItems(items.map((arr) => {
+            if (arr.id === isEditing) {
+                return { ...arr, inputData }
+            }
+        }))
+        setItems(...items, inputData);
+        setIsEditing(id);
+    };
 
 
 
@@ -70,28 +138,6 @@ const AddExpensePage = () => {
 
         fetchExpenses(); // Call the fetch function
     }, []); // Run only on component mount
-
-
-
-    const handlerOnDeleteBtn = async (id) => {
-        console.log('deleting');
-        try {
-            await axios.delete(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent/${id}.json`)
-            setItems(items.filter((item) => item.id !== id));
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-
-    const handlerOnEditBtn = (id) => {
-        console.log('editing');
-    };
-
-
-
-
-
 
 
 
@@ -120,6 +166,9 @@ const AddExpensePage = () => {
                         </select>
 
                         <button type="submit" className={styles.add_exp__btn}> Add Expense </button>
+
+                        {/* {toggleBtnEdit ? <button type="submit" className={styles.add_exp__btn}> Add Expense </button> : <button type="submit" className={styles.edit_btn}
+                        > Edit </button>} */}
                     </form>
                 </div>
             </div>
