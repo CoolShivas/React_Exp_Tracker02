@@ -64,33 +64,48 @@ const AddExpensePage = () => {
     };
 
 
-    // const handlerOnEditBtn = async (id) => {
+    const handlerOnEditBtn = async (currElem) => {
+        console.log(currElem);
+        try {
+            // const res = await axios.get(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent/${currElem}.json`);
 
-    //     try {
-    //         const res = await axios.get(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent/${id}.json`);
+            // console.log(res);
 
-    //         console.log(res);
+            setInputSpentMoney(currElem.spentMoney);
+            setInputDescription(currElem.details);
+            setInputChooseCategory(currElem.selectCat);
+            // handlerOnEditUpdate(currElem.id);
+            const res = await axios.delete(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent/${currElem.id}.json`);
 
-    //         setInputSpentMoney(inputSpentMoney);
-    //         setInputDescription(inputDescription);
-    //         setInputChooseCategory(inputChooseCategory);
-    //         handlerOnEditUpdate();
+            const res2 = await axios.get(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent.json`);
+            const dataArray = Object.entries(res2.data).map(([key, value]) => {
+                return { id: key, ...value };
+            });// In firebase the data is wrapped inside the unique id for taking the data back we have used the Object.entries to get the proper id and value;
+            // console.log(response.data);
+            setItems(dataArray);
 
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     // const handlerOnEditUpdate = async (id) => {
     //     try {
-    //         const expenseData = {
-    //             inputSpentMoney: inputSpentMoney,
-    //             inputDescription: inputDescription,
-    //             inputChooseCategory: inputChooseCategory,
-    //         };
+    //         // const expenseData = {
+    //         //     inputSpentMoney: inputSpentMoney,
+    //         //     inputDescription: inputDescription,
+    //         //     inputChooseCategory: inputChooseCategory,
+    //         // };
 
-    //         const res = await axios.patch(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent/${id}.json`, expenseData);
+    //         const res = await axios.delete(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent/${id}.json`);
 
+    //         const res2 = await axios.get(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent.json`);
+    //         const dataArray = Object.entries(res2.data).map(([key, value]) => {
+    //             return { id: key, ...value };
+    //         });
+    //         // console.log(response.data);
+    //         setItems(dataArray);
     //         console.log(res);
     //     } catch (error) {
     //         console.log(error);
@@ -99,25 +114,26 @@ const AddExpensePage = () => {
     // };
 
 
-    const handlerOnEditBtn = (id) => {
-        let inputData = items.find((elem) => {
-            return elem.id === id;
-        })
-        console.log(inputData);
-        setInputSpentMoney(inputData.spentMoney);
-        setInputDescription(inputData.details);
-        setInputChooseCategory(inputData.selectCat);
-        axios.put(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent/${id}.json`, {
-            inputData
-        });
-        setItems(items.map((arr) => {
-            if (arr.id === isEditing) {
-                return { ...arr, inputData }
-            }
-        }))
-        setItems(...items, inputData);
-        setIsEditing(id);
-    };
+    // const handlerOnEditBtn = (id) => {
+    //     let inputData = items.find((elem) => {
+    //         return elem.id === id;
+    //     })
+    //     console.log(inputData);
+    //     setInputSpentMoney(inputData.spentMoney);
+    //     setInputDescription(inputData.details);
+    //     setInputChooseCategory(inputData.selectCat);
+    //     axios.put(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent/${id}.json`, {
+    //         inputData
+    //     });
+    //     setItems(items.map((arr) => {
+    //         if (arr.id === id) {
+    //             return { ...arr }
+    //         }
+    //     }))
+    //     setItems(...items);
+    //     console.log(items);
+    //     // setIsEditing(id);
+    // };
 
 
 
@@ -184,7 +200,7 @@ const AddExpensePage = () => {
 
                         <div className={styles.edit_del__actions}>
                             <button className={styles.edit_btn}
-                                onClick={() => handlerOnEditBtn(currElem.id)}
+                                onClick={() => handlerOnEditBtn(currElem)}
                             > Edit </button>
                             <button className={styles.del_btn}
                                 onClick={() => handlerOnDeleteBtn(currElem.id)}
