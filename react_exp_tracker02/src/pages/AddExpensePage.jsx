@@ -10,7 +10,7 @@ const AddExpensePage = () => {
     const [inputDescription, setInputDescription] = useState();
     const [inputChooseCategory, setInputChooseCategory] = useState();
     // const [toggleBtnEdit, setToggleBtnEdit] = useState(true);
-    const [isEditing, setIsEditing] = useState(null);
+    // const [isEditing, setIsEditing] = useState(null);
 
 
 
@@ -37,7 +37,7 @@ const AddExpensePage = () => {
 
 
         try {
-            const res = await axios.post(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent.json`, expTracker)
+            const res = await axios.post(`https://expensetracker02-e2058-default-rtdb.firebaseio.com/moneySpent.json`, expTracker)
             console.log(expTracker);
             setItems([...items, expTracker]);
         } catch (error) {
@@ -56,7 +56,7 @@ const AddExpensePage = () => {
     const handlerOnDeleteBtn = async (id) => {
         console.log('deleting');
         try {
-            await axios.delete(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent/${id}.json`)
+            await axios.delete(`https://expensetracker02-e2058-default-rtdb.firebaseio.com/moneySpent/${id}.json`)
             setItems(items.filter((item) => item.id !== id));
         } catch (error) {
             console.log(error);
@@ -75,9 +75,9 @@ const AddExpensePage = () => {
             setInputDescription(currElem.details);
             setInputChooseCategory(currElem.selectCat);
             // handlerOnEditUpdate(currElem.id);
-            const res = await axios.delete(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent/${currElem.id}.json`);
+            const res = await axios.delete(`https://expensetracker02-e2058-default-rtdb.firebaseio.com/moneySpent/${currElem.id}.json`);
 
-            const res2 = await axios.get(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent.json`);
+            const res2 = await axios.get(`https://expensetracker02-e2058-default-rtdb.firebaseio.com/moneySpent.json`);
             const dataArray = Object.entries(res2.data).map(([key, value]) => {
                 return { id: key, ...value };
             });// In firebase the data is wrapped inside the unique id for taking the data back we have used the Object.entries to get the proper id and value;
@@ -141,7 +141,7 @@ const AddExpensePage = () => {
 
         const fetchExpenses = async () => {
             try {
-                const response = await axios.get(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent.json`);
+                const response = await axios.get(`https://expensetracker02-e2058-default-rtdb.firebaseio.com/moneySpent.json`);
                 const dataArray = Object.entries(response.data).map(([key, value]) => {
                     return { id: key, ...value };
                 });
