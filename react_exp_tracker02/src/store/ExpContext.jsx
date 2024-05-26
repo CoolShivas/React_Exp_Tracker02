@@ -78,16 +78,44 @@ const authSlice = createSlice({
 });
 
 
+const INITIAL_ADD_EXPENSES = {
+    expensing: []
+};
+
+
+const addExpSlice = createSlice({
+    name: "Add_Expenses",
+    initialState: INITIAL_ADD_EXPENSES,
+    reducers: {
+        addItems: (currState, action) => {
+            currState.expensing = [...currState.expensing, action.payload];
+        },
+        deleteItems: (currState, action) => {
+            currState.expensing = currState.expensing.filter((exp) => {
+                exp.id !== action.payload.id
+            });
+        },
+        editItems: (currState, action) => {
+            const index = currState.expensing.findIndex((exp) => exp.id === action.payload.id);
+            if (index !== -1) {
+                currState.expensing[index] = action.payload;
+            }
+        },
+    }
+});
+
 
 const expenseConfigureStore = configureStore({
     reducer: {
-        authen: authSlice.reducer
+        authen: authSlice.reducer,
+        addExpenses: addExpSlice.reducer
     }
 });
 
 
 export const authActions = authSlice.actions;
 
+export const addExpActions = addExpSlice.actions;
 
 
 export default expenseConfigureStore;

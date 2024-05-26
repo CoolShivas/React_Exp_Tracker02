@@ -1,8 +1,12 @@
 import axios from "axios";
 import styles from "./AddExpensePage.module.css";
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from "react-redux";
+import { addExpActions, authActions } from "../store/ExpContext";
 
 const AddExpensePage = () => {
+
+    const dispatch = useDispatch();
 
     const [items, setItems] = useState([]);
 
@@ -40,6 +44,7 @@ const AddExpensePage = () => {
             const res = await axios.post(`https://expensetracker02-e2058-default-rtdb.firebaseio.com/moneySpent.json`, expTracker)
             console.log(expTracker);
             setItems([...items, expTracker]);
+            dispatch(addExpActions.addItems(expTracker));
         } catch (error) {
             console.log(error);
         }
@@ -57,7 +62,10 @@ const AddExpensePage = () => {
         console.log('deleting');
         try {
             await axios.delete(`https://expensetracker02-e2058-default-rtdb.firebaseio.com/moneySpent/${id}.json`)
-            setItems(items.filter((item) => item.id !== id));
+            // setItems(items.filter((item) => item.id !== id));
+            dispatch(addExpActions.deleteItems({
+                id: id
+            }));
         } catch (error) {
             console.log(error);
         }
@@ -82,8 +90,10 @@ const AddExpensePage = () => {
                 return { id: key, ...value };
             });// In firebase the data is wrapped inside the unique id for taking the data back we have used the Object.entries to get the proper id and value;
             // console.log(response.data);
-            setItems(dataArray);
+            // setItems(dataArray);
 
+            dispatch(addExpActions.editItems(dataArray));
+            dispatch(addExpActions.deleteItems({ id: currElem.id }));
 
         } catch (error) {
             console.log(error);
