@@ -54,6 +54,8 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 
+
+
 const INITIAL_VALUE = {
     isAuthenticated: false,
 };
@@ -63,6 +65,9 @@ const authSlice = createSlice({
     name: "Authentication",
     initialState: INITIAL_VALUE,
     reducers: {
+        signup: (currState, action) => {
+            currState.isAuthenticated = true;
+        },
         login: (currState, action) => {
             currState.isAuthenticated = true;
         },

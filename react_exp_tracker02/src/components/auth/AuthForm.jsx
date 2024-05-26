@@ -2,11 +2,15 @@ import axios from "axios";
 import { useRef } from "react";
 import styles from "./AuthForm.module.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/ExpContext";
 
 
 
 
 const AuthForm = () => {
+
+    const dispatch = useDispatch();
 
     const myHistory = useHistory();
 
@@ -30,13 +34,14 @@ const AuthForm = () => {
                 confirmPass: enteredConfirmPassword,
             });
             console.log(res);
-
             console.log(enteredEmail);
             console.log(enteredPassword);
             console.log(enteredConfirmPassword);
         } catch (error) {
             console.log(error);
         }
+        console.log("Your are SignUp", authActions.signup());
+        dispatch(authActions.signup());
         myHistory.replace("/login");
     };
 
