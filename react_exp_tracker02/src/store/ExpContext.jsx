@@ -1,42 +1,88 @@
-import React, { createContext, useState } from 'react'
+// import React, { createContext, useState } from 'react'
 
-const ExpContext = createContext({
-    token: "",
-    isLoggedIn: false,
-    logIn: () => { },
-    logOut: () => { },
-});
+// const ExpContext = createContext({
+//     token: "",
+//     isLoggedIn: false,
+//     logIn: () => { },
+//     logOut: () => { },
+// });
 
 
-export const ExpTraContextProvider = (props) => {
+// export const ExpTraContextProvider = (props) => {
 
-    const [token, setToken] = useState(null);
+//     const [token, setToken] = useState(null);
 
-    const [isUserLogIn, setIsUserLogIn] = useState(token);
+//     const [isUserLogIn, setIsUserLogIn] = useState(token);
 
-    const handlerOnLogIn = (idTokey) => {
-        setToken(idTokey);
-        localStorage.setItem("SaveToken", idTokey);
-        setIsUserLogIn(true);
-    };
+//     const handlerOnLogIn = (idTokey) => {
+//         setToken(idTokey);
+//         localStorage.setItem("SaveToken", idTokey);
+//         setIsUserLogIn(true);
+//     };
 
-    const handlerOnLogOut = () => {
-        setToken(null);
-        localStorage.removeItem("SaveToken");
-        setIsUserLogIn(false);
-    };
+//     const handlerOnLogOut = () => {
+//         setToken(null);
+//         localStorage.removeItem("SaveToken");
+//         setIsUserLogIn(false);
+//     };
 
-    const expTraValue = {
-        token: token,
-        isLoggedIn: isUserLogIn,
-        logIn: handlerOnLogIn,
-        logOut: handlerOnLogOut,
-    };
+//     const expTraValue = {
+//         token: token,
+//         isLoggedIn: isUserLogIn,
+//         logIn: handlerOnLogIn,
+//         logOut: handlerOnLogOut,
+//     };
 
-    return <ExpContext.Provider value={expTraValue}>
-        {props.children}
-    </ExpContext.Provider>
+//     return <ExpContext.Provider value={expTraValue}>
+//         {props.children}
+//     </ExpContext.Provider>
+// };
+
+
+// export default ExpContext;
+
+
+
+
+
+
+
+///////////******************************************************************************* */
+
+
+
+import { configureStore, createSlice } from "@reduxjs/toolkit";
+
+
+const INITIAL_VALUE = {
+    isAuthenticated: false,
 };
 
 
-export default ExpContext;
+const authSlice = createSlice({
+    name: "Authentication",
+    initialState: INITIAL_VALUE,
+    reducers: {
+        login: (currState, action) => {
+            currState.isAuthenticated = true;
+        },
+        logout: (currState, action) => {
+            currState.isAuthenticated = false;
+        },
+    }
+});
+
+
+
+const expenseConfigureStore = configureStore({
+    reducer: {
+        authen: authSlice.reducer
+    }
+});
+
+
+export const authActions = authSlice.actions;
+
+
+
+export default expenseConfigureStore;

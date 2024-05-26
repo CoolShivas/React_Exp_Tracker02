@@ -3,13 +3,16 @@ import axios from "axios";
 import styles from "./WelcomePage.module.css";
 import InCompleteProfilePage from "./InCompleteProfilePage";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
-import { useContext } from "react";
-import ExpContext from "../store/ExpContext";
+import { useDispatch } from "react-redux";
+import { authActions } from "../store/ExpContext";
+// import { useContext } from "react";
+// import ExpContext from "../store/ExpContext";
 
 
 const WelcomePage = () => {
 
-    const { logOut } = useContext(ExpContext);
+    // const { logOut } = useContext(ExpContext);
+    const dispatch = useDispatch();
 
     const returnToLogin = useHistory();
 
@@ -30,7 +33,9 @@ const WelcomePage = () => {
 
     const handlerOnLogOutBtn = () => {
         // localStorage.removeItem("SaveToken");
-        logOut();
+        // logOut();
+        dispatch(authActions.logout());
+        localStorage.removeItem("SaveToken");
         returnToLogin.replace("/login");
     };
 

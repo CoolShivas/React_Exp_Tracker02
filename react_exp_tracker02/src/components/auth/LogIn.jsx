@@ -1,11 +1,15 @@
 import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom";
 import styles from "./LogIn.module.css";
 import { useContext, useRef } from "react";
-import ExpContext from "../../store/ExpContext";
+// import ExpContext, { authActions } from "../../store/ExpContext";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/ExpContext";
 
 const LogIn = () => {
 
-    const { logIn } = useContext(ExpContext);
+    const dispatch = useDispatch();
+
+    // const { logIn } = useContext(ExpContext);
 
     const myWelPage = useHistory();
 
@@ -50,7 +54,9 @@ const LogIn = () => {
             console.log(response.idToken);
             // localStorage.setItem("SaveToken", response.idToken);
             // Saving the token id in localStorage of a particular user for future profile updates
-            logIn(response.idToken);
+            // logIn(response.idToken);
+            dispatch(authActions.login());
+            localStorage.setItem("SaveToken", response.idToken);
 
         }).catch((err) => {
             console.log(err.message);

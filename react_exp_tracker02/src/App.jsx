@@ -10,12 +10,12 @@ import AboutPage from "./pages/AboutPage";
 import HomePage from "./pages/HomePage";
 import { Switch, Route } from "react-router-dom/cjs/react-router-dom";
 import styles from "./App.module.css";
-import { useContext } from "react";
-import ExpContext from "./store/ExpContext";
+// import { useContext } from "react";
+// import ExpContext from "./store/ExpContext";
 
 const App = () => {
 
-  const { isLoggedIn } = useContext(ExpContext);
+  // const { isLoggedIn } = useContext(ExpContext);
 
   return (
     <>
