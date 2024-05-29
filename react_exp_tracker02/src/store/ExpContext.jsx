@@ -91,9 +91,13 @@ const addExpSlice = createSlice({
             currState.expensing = [...currState.expensing, action.payload];
         },
         deleteItems: (currState, action) => {
-            currState.expensing = currState.expensing.filter((exp) => {
-                exp.id !== action.payload.id
+            // console.log(currState.expensing);
+            const arr = currState.expensing.filter((exp) => {
+                exp.id != action.payload
+                console.log(exp.id, action.payload)
             });
+            console.log(currState.expensing);
+            currState.expensing = [...arr];
         },
         editItems: (currState, action) => {
             const index = currState.expensing.findIndex((exp) => exp.id === action.payload.id);
@@ -101,6 +105,9 @@ const addExpSlice = createSlice({
                 currState.expensing[index] = action.payload;
             }
         },
+        setItems: (currState, action) => {
+            currState.expensing = [...action.payload];
+        }
     }
 });
 

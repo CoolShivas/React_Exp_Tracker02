@@ -1,21 +1,22 @@
 import axios from "axios";
 import styles from "./AddExpensePage.module.css";
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from "react-redux";
-import { addExpActions, authActions } from "../store/ExpContext";
+import { useDispatch, useSelector } from "react-redux";
+import { addExpActions } from "../store/ExpContext";
 
 const AddExpensePage = () => {
 
+    const { expensing } = useSelector((store) => store.addExpenses);
+
     const dispatch = useDispatch();
 
-    const [items, setItems] = useState([]);
+    // const [items, setItems] = useState([]);
+    // Now, we are using ReduxToolkit. Therefore, we store the array in the redux createSlice i.e,  expensing: [] ;
+    // So, there is no use of items array ;
 
     const [inputSpentMoney, setInputSpentMoney] = useState();
     const [inputDescription, setInputDescription] = useState();
     const [inputChooseCategory, setInputChooseCategory] = useState();
-    // const [toggleBtnEdit, setToggleBtnEdit] = useState(true);
-    // const [isEditing, setIsEditing] = useState(null);
-
 
 
     const handlerOnSpentMoney = (event) => {
@@ -43,11 +44,12 @@ const AddExpensePage = () => {
         try {
             const res = await axios.post(`https://expensetracker02-e2058-default-rtdb.firebaseio.com/moneySpent.json`, expTracker)
             console.log(expTracker);
-            setItems([...items, expTracker]);
+            // setItems([...items, expTracker]); // Now, we setting the array in redux's expensing array ;
             dispatch(addExpActions.addItems(expTracker));
         } catch (error) {
             console.log(error);
         }
+
 
         setInputSpentMoney('');
         setInputDescription('');
@@ -62,10 +64,10 @@ const AddExpensePage = () => {
         console.log('deleting');
         try {
             await axios.delete(`https://expensetracker02-e2058-default-rtdb.firebaseio.com/moneySpent/${id}.json`)
-            // setItems(items.filter((item) => item.id !== id));
-            dispatch(addExpActions.deleteItems({
-                id: id
-            }));
+            // setItems(items.filter((item) => item.id !== id));  // Now, we are filter the array from redux's expensing array reducer function ;
+
+            dispatch(addExpActions.deleteItems(id));
+
         } catch (error) {
             console.log(error);
         }
@@ -75,14 +77,11 @@ const AddExpensePage = () => {
     const handlerOnEditBtn = async (currElem) => {
         console.log(currElem);
         try {
-            // const res = await axios.get(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent/${currElem}.json`);
-
-            // console.log(res);
 
             setInputSpentMoney(currElem.spentMoney);
             setInputDescription(currElem.details);
             setInputChooseCategory(currElem.selectCat);
-            // handlerOnEditUpdate(currElem.id);
+
             const res = await axios.delete(`https://expensetracker02-e2058-default-rtdb.firebaseio.com/moneySpent/${currElem.id}.json`);
 
             const res2 = await axios.get(`https://expensetracker02-e2058-default-rtdb.firebaseio.com/moneySpent.json`);
@@ -90,61 +89,16 @@ const AddExpensePage = () => {
                 return { id: key, ...value };
             });// In firebase the data is wrapped inside the unique id for taking the data back we have used the Object.entries to get the proper id and value;
             // console.log(response.data);
-            // setItems(dataArray);
+
+            // setItems(dataArray);  // Now, we setting the array in redux's expensing array ;
 
             dispatch(addExpActions.editItems(dataArray));
-            dispatch(addExpActions.deleteItems({ id: currElem.id }));
+            dispatch(addExpActions.deleteItems(currElem.id));
 
         } catch (error) {
             console.log(error);
         }
     };
-
-    // const handlerOnEditUpdate = async (id) => {
-    //     try {
-    //         // const expenseData = {
-    //         //     inputSpentMoney: inputSpentMoney,
-    //         //     inputDescription: inputDescription,
-    //         //     inputChooseCategory: inputChooseCategory,
-    //         // };
-
-    //         const res = await axios.delete(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent/${id}.json`);
-
-    //         const res2 = await axios.get(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent.json`);
-    //         const dataArray = Object.entries(res2.data).map(([key, value]) => {
-    //             return { id: key, ...value };
-    //         });
-    //         // console.log(response.data);
-    //         setItems(dataArray);
-    //         console.log(res);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-
-    // };
-
-
-    // const handlerOnEditBtn = (id) => {
-    //     let inputData = items.find((elem) => {
-    //         return elem.id === id;
-    //     })
-    //     console.log(inputData);
-    //     setInputSpentMoney(inputData.spentMoney);
-    //     setInputDescription(inputData.details);
-    //     setInputChooseCategory(inputData.selectCat);
-    //     axios.put(`https://exptracker-9462a-default-rtdb.firebaseio.com/moneySpent/${id}.json`, {
-    //         inputData
-    //     });
-    //     setItems(items.map((arr) => {
-    //         if (arr.id === id) {
-    //             return { ...arr }
-    //         }
-    //     }))
-    //     setItems(...items);
-    //     console.log(items);
-    //     // setIsEditing(id);
-    // };
-
 
 
     useEffect(() => {
@@ -156,17 +110,20 @@ const AddExpensePage = () => {
                     return { id: key, ...value };
                 });
                 // console.log(response.data);
-                setItems(dataArray);
+                // setItems(dataArray);  // Now, we setting the array in redux's expensing array ;
+                dispatch(addExpActions.setItems(dataArray));
+
             } catch (error) {
                 console.error('Error fetching expenses:', error);
             }
         };
 
         fetchExpenses(); // Call the fetch function
-    }, []); // Run only on component mount
+    }, [dispatch]); // Run only on component mount
 
 
 
+    console.log(expensing)
     return (
         <>
             <div className={styles.add_exp__div}>
@@ -193,15 +150,18 @@ const AddExpensePage = () => {
 
                         <button type="submit" className={styles.add_exp__btn}> Add Expense </button>
 
-                        {/* {toggleBtnEdit ? <button type="submit" className={styles.add_exp__btn}> Add Expense </button> : <button type="submit" className={styles.edit_btn}
-                        > Edit </button>} */}
                     </form>
                 </div>
             </div>
-            {console.log(items)}
+
+
+            {/* {console.log(items)} */}
             <ol className={styles.listing_items}>
 
-                {items.length > 0 && items.map((currElem) => {
+                {/* Now, instead of items array we are using expensing array of redux */}
+
+                {/* {items.length > 0 && items.map((currElem) => { */}
+                {expensing.length > 0 && expensing.map((currElem) => {
                     return <li key={currElem.id} className={styles.individual_items}
                     >
                         Rs. {currElem.spentMoney} /- {currElem.details} {currElem.selectCat}
