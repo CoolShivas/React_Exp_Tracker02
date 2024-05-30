@@ -71,3 +71,16 @@
   border: none;
   margin: 1px 8px;
 }
+
+.active_premium__btn {
+  background-color: #ffeea9;
+  font-size: 20px;
+  font-weight: 400;
+  padding: 8px;
+
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
+}

@@ -122,8 +122,10 @@ const AddExpensePage = () => {
     }, [dispatch]); // Run only on component mount
 
 
+    const totalExpense = expensing.reduce((acc, item) => acc + Number(item.spentMoney), 0);
+    console.log(totalExpense);
 
-    console.log(expensing)
+    // console.log(expensing)
     return (
         <>
             <div className={styles.add_exp__div}>
@@ -181,6 +183,10 @@ const AddExpensePage = () => {
                     </li>
                 })}
             </ol>
+            <center>
+                {totalExpense >= 10000 && <button className={styles.active_premium__btn}> Activate Premium </button>}
+            </center>
+
         </>
     )
 }
