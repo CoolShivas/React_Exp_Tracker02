@@ -84,3 +84,9 @@
   -ms-border-radius: 12px;
   -o-border-radius: 12px;
 }
+
+.active_premium__btn:hover {
+  background-color: yellow;
+  font-size: 25px;
+  font-weight: 500;
+}

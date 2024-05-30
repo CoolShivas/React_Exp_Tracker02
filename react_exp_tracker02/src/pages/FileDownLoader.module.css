@@ -1,0 +1,8 @@
+.css_downloader {
+  background-color: white;
+}
+
+.css_downloader:hover {
+  background-color: brown;
+  color: white;
+}

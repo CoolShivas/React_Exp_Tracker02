@@ -1,3 +1,4 @@
+import FileDownLoader from "./FileDownLoader";
 import axios from "axios";
 import styles from "./AddExpensePage.module.css";
 import React, { useEffect, useState } from 'react'
@@ -185,6 +186,7 @@ const AddExpensePage = () => {
             </ol>
             <center>
                 {totalExpense >= 10000 && <button className={styles.active_premium__btn}> Activate Premium </button>}
+                <FileDownLoader></FileDownLoader>
             </center>
 
         </>
