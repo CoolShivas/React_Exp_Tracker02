@@ -124,7 +124,7 @@ const AddExpensePage = () => {
 
 
     const totalExpense = expensing.reduce((acc, item) => acc + Number(item.spentMoney), 0);
-    console.log(totalExpense);
+    // console.log(totalExpense);
 
     // console.log(expensing)
     return (

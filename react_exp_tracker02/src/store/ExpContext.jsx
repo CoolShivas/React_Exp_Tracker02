@@ -112,10 +112,25 @@ const addExpSlice = createSlice({
 });
 
 
+const InitialTheme = { darkMode: false };
+
+const themeSlice = createSlice({
+    name: "theme",
+    initialState: InitialTheme,
+    reducers: {
+        themeChanger: (currState, action) => {
+            currState.darkMode = !currState.darkMode;
+        }
+    }
+})
+
+
+
 const expenseConfigureStore = configureStore({
     reducer: {
         authen: authSlice.reducer,
-        addExpenses: addExpSlice.reducer
+        addExpenses: addExpSlice.reducer,
+        theming: themeSlice.reducer
     }
 });
 
@@ -124,5 +139,6 @@ export const authActions = authSlice.actions;
 
 export const addExpActions = addExpSlice.actions;
 
+export const themeActions = themeSlice.actions;
 
 export default expenseConfigureStore;

@@ -3,14 +3,16 @@ import axios from "axios";
 import styles from "./WelcomePage.module.css";
 import InCompleteProfilePage from "./InCompleteProfilePage";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
-import { useDispatch } from "react-redux";
-import { addExpActions, authActions } from "../store/ExpContext";
-import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addExpActions, authActions, themeActions } from "../store/ExpContext";
+import { useEffect, useState } from "react";
 // import { useContext } from "react";
 // import ExpContext from "../store/ExpContext";
 
 
 const WelcomePage = () => {
+
+    const { darkMode } = useSelector((store) => store.theming);
 
     // const { logOut } = useContext(ExpContext);
     const dispatch = useDispatch();
@@ -62,10 +64,29 @@ const WelcomePage = () => {
         fetchExpenses(); // Call the fetch function
     }, [dispatch]); // Run only on component mount
 
+
+    const [dayTheme, setDayTheme] = useState(false);
+
+    const handlerOnThemeChange = () => {
+        setDayTheme((oldState) => !oldState);
+        dispatch(themeActions.themeChanger());
+    };
+
+
     return (
-        <>
+        <div style={{ backgroundColor: darkMode ? "black" : "white", color: darkMode ? "white" : "black" }}>
             <div className={styles.welcomepage_div}>
                 <h3> Welcome to Expense Tracker!!! </h3>
+                <span>
+                    <span>
+                        <button
+                            className={styles.theme_btn}
+                            onClick={handlerOnThemeChange}
+                        >
+                            {dayTheme ? "Day" : "Night"}
+                        </button>
+                    </span>
+                </span>
                 <span className={styles.incomplete_profilepage}>
                     <InCompleteProfilePage
                     ></InCompleteProfilePage>
@@ -80,7 +101,7 @@ const WelcomePage = () => {
 
             <AddExpensePage></AddExpensePage>
 
-        </>
+        </div>
     )
 }
 
