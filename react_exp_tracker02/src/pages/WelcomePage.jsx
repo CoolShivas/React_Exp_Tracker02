@@ -4,7 +4,8 @@ import styles from "./WelcomePage.module.css";
 import InCompleteProfilePage from "./InCompleteProfilePage";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import { useDispatch } from "react-redux";
-import { authActions } from "../store/ExpContext";
+import { addExpActions, authActions } from "../store/ExpContext";
+import { useEffect } from "react";
 // import { useContext } from "react";
 // import ExpContext from "../store/ExpContext";
 
@@ -39,6 +40,27 @@ const WelcomePage = () => {
         returnToLogin.replace("/login");
     };
 
+
+    useEffect(() => {
+
+        const fetchExpenses = async () => {
+            try {
+                const response = await axios.get(`https://expensetracker02-e2058-default-rtdb.firebaseio.com/moneySpent.json`);
+                const dataArray = Object.entries(response.data).map(([key, value]) => {
+                    return { id: key, ...value };
+                });
+                // console.log(response.data);
+                // setItems(dataArray);  // Now, we setting the array in redux's expensing array ;
+                // dispatch(addExpActions.setItems(dataArray));
+                dispatch(addExpActions.setItems(dataArray));
+
+            } catch (error) {
+                console.error('Error fetching expenses:', error);
+            }
+        };
+
+        fetchExpenses(); // Call the fetch function
+    }, [dispatch]); // Run only on component mount
 
     return (
         <>

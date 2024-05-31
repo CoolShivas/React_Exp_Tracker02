@@ -93,7 +93,7 @@ const AddExpensePage = () => {
 
             // setItems(dataArray);  // Now, we setting the array in redux's expensing array ;
 
-            dispatch(addExpActions.editItems(dataArray));
+            dispatch(addExpActions.editItems(currElem.id, ...dataArray));
             dispatch(addExpActions.deleteItems(currElem.id));
 
         } catch (error) {
@@ -102,25 +102,25 @@ const AddExpensePage = () => {
     };
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const fetchExpenses = async () => {
-            try {
-                const response = await axios.get(`https://expensetracker02-e2058-default-rtdb.firebaseio.com/moneySpent.json`);
-                const dataArray = Object.entries(response.data).map(([key, value]) => {
-                    return { id: key, ...value };
-                });
-                // console.log(response.data);
-                // setItems(dataArray);  // Now, we setting the array in redux's expensing array ;
-                dispatch(addExpActions.setItems(dataArray));
+    //     const fetchExpenses = async () => {
+    //         try {
+    //             const response = await axios.get(`https://expensetracker02-e2058-default-rtdb.firebaseio.com/moneySpent.json`);
+    //             const dataArray = Object.entries(response.data).map(([key, value]) => {
+    //                 return { id: key, ...value };
+    //             });
+    //             // console.log(response.data);
+    //             // setItems(dataArray);  // Now, we setting the array in redux's expensing array ;
+    //             dispatch(addExpActions.setItems(dataArray));
 
-            } catch (error) {
-                console.error('Error fetching expenses:', error);
-            }
-        };
+    //         } catch (error) {
+    //             console.error('Error fetching expenses:', error);
+    //         }
+    //     };
 
-        fetchExpenses(); // Call the fetch function
-    }, [dispatch]); // Run only on component mount
+    //     fetchExpenses(); // Call the fetch function
+    // }, [dispatch]); // Run only on component mount
 
 
     const totalExpense = expensing.reduce((acc, item) => acc + Number(item.spentMoney), 0);
